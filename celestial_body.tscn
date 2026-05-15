@@ -1,0 +1,24 @@
+[gd_scene format=3 uid="uid://dcbmjch1ajwas"]
+
+[ext_resource type="Script" uid="uid://gageyuqwegt1" path="res://celestial_body.gd" id="2_57uvq"]
+
+[sub_resource type="SphereMesh" id="SphereMesh_pbhp0"]
+radius = 10.0
+height = 20.0
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_57uvq"]
+radius = 0.1
+
+[node name="CelestialBody" type="Area3D" unique_id=155233638]
+script = ExtResource("2_57uvq")
+radius = 10.0
+mass = 100.0
+initial_velocity = Vector3(10, 10, 0)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=842175262]
+mesh = SubResource("SphereMesh_pbhp0")
+metadata/_edit_lock_ = true
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1475940918]
+shape = SubResource("SphereShape3D_57uvq")
+metadata/_edit_lock_ = true

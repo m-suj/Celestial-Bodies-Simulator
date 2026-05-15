@@ -1,0 +1,13 @@
+[gd_scene format=3 uid="uid://ck6qetj74lxgt"]
+
+[ext_resource type="Script" uid="uid://bv6tyt0hsic5q" path="res://gravity_server.gd" id="1_0ypc1"]
+
+[node name="GravityServer" type="Node" unique_id=731761790]
+script = ExtResource("1_0ypc1")
+
+[node name="InitCooldown" type="Timer" parent="." unique_id=618546219]
+wait_time = 2.0
+one_shot = true
+autostart = true
+
+[connection signal="timeout" from="InitCooldown" to="." method="_on_init_cooldown_timeout"]
