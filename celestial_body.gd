@@ -6,7 +6,7 @@ class_name CelestialBody extends Area3D
 @export var initial_velocity: Vector3 = Vector3.ZERO
 
 var acceleration: Vector3 = Vector3.ZERO
-@onready var velocity: Vector3 = initial_velocity
+@onready var velocity: Vector3
 @onready var mesh_instance: MeshInstance3D = $MeshInstance3D
 @onready var collision: CollisionShape3D = $CollisionShape3D
 
@@ -15,6 +15,8 @@ func _ready():
 	mesh_instance.mesh = mesh_instance.mesh.duplicate()
 	update_sphere()
 	GravityServer.register_celestial_body(self )
+	velocity = initial_velocity
+	print("celestial body ready")
 
 
 func update_sphere():

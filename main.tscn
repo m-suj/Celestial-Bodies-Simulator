@@ -1,8 +1,10 @@
 [gd_scene format=3 uid="uid://dot3x2ytg7s4p"]
 
 [ext_resource type="PackedScene" uid="uid://dcbmjch1ajwas" path="res://celestial_body.tscn" id="1_ig7tw"]
+[ext_resource type="Script" uid="uid://5ffed0xvfurk" path="res://binary_system.gd" id="1_lquwl"]
 [ext_resource type="Script" uid="uid://cvcavis5j3tsi" path="res://free_fly_camera.gd" id="2_0xm2m"]
 [ext_resource type="Texture2D" uid="uid://b6kakshd6he5q" path="res://icon.svg" id="3_h2yge"]
+[ext_resource type="Texture2D" uid="uid://cv3kdgn8g8ic8" path="res://bg.jpg" id="4_1bvp3"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_0xm2m"]
 albedo_color = Color(0.42745098, 0.23529412, 0.07058824, 1)
@@ -13,22 +15,37 @@ uv1_scale = Vector3(50, 50, 50)
 material = SubResource("StandardMaterial3D_0xm2m")
 size = Vector2(5000, 5000)
 
-[sub_resource type="SphereMesh" id="SphereMesh_h2yge"]
-radius = 5.0
-height = 10.0
+[sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_lquwl"]
+panorama = ExtResource("4_1bvp3")
+
+[sub_resource type="Sky" id="Sky_7mycd"]
+sky_material = SubResource("PanoramaSkyMaterial_lquwl")
+
+[sub_resource type="Environment" id="Environment_272bh"]
+background_mode = 2
+sky = SubResource("Sky_7mycd")
 
 [node name="Main" type="Node3D" unique_id=140970316]
 
-[node name="CelestialBody" parent="." unique_id=155233638 instance=ExtResource("1_ig7tw")]
+[node name="BinarySystem" type="Node3D" parent="." unique_id=48642442]
+script = ExtResource("1_lquwl")
+a = 200.0
+
+[node name="CelestialBody" parent="BinarySystem" unique_id=155233638 instance=ExtResource("1_ig7tw")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 100)
 radius = 5.0
-mass = 1.0
-initial_velocity = Vector3(100, 0, 0)
+initial_velocity = Vector3(0, 0, 0)
 
-[node name="CelestialBody2" parent="." unique_id=984351212 instance=ExtResource("1_ig7tw")]
+[node name="CelestialBody2" parent="BinarySystem" unique_id=984351212 instance=ExtResource("1_ig7tw")]
 radius = 50.0
 mass = 2000.0
 initial_velocity = Vector3(0, 0, 0)
+
+[node name="CelestialBody3" parent="." unique_id=1090227221 instance=ExtResource("1_ig7tw")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -100)
+radius = 20.0
+mass = 1000.0
+initial_velocity = Vector3(-100, 0, 50)
 
 [node name="Camera3D" type="Camera3D" parent="." unique_id=798223230]
 transform = Transform3D(-0.49551934, -0.5822406, 0.6445592, -2.9300748e-08, 0.7420694, 0.67032313, -0.8685969, 0.33215803, -0.3677098, 149.8069, 159.68263, 1.8317795)
@@ -43,8 +60,8 @@ directional_shadow_max_distance = 1000.0
 
 [node name="Ground" type="MeshInstance3D" parent="." unique_id=761138730]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -26, 0)
+visible = false
 mesh = SubResource("PlaneMesh_0xm2m")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=811076823]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 100)
-mesh = SubResource("SphereMesh_h2yge")
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=1438962887]
+environment = SubResource("Environment_272bh")
