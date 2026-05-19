@@ -16,7 +16,6 @@ func _ready():
 	update_sphere()
 	GravityServer.register_celestial_body(self )
 	velocity = initial_velocity
-	print("celestial body ready")
 
 
 func update_sphere():

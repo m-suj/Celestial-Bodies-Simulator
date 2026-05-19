@@ -22,4 +22,3 @@ func _ready() -> void:
 			v = Vector3.ZERO
 			v.x = sqrt(GravityServer.G * c2.mass * (2 / r - 1 / a))
 			c1.velocity = v
-	print("binary system ready")
